@@ -1,5 +1,10 @@
 #pragma once
 #include <random>
+#include <iostream>
+#include <algorithm>
+#include <set>
+#include <unordered_set>
+
 class Credit
 {
 private:
@@ -72,5 +77,13 @@ struct CompareByValue {
         }
 
         return a.get_name() < b.get_name(); 
+    }
+};
+
+struct CreditHash {
+    size_t operator()(const Credit& c) const {
+        size_t name_hash = std::hash<std::string>()(c.get_name());    // (1)
+        size_t value_hash = std::hash<double>()(c.get_value());       // (2)
+        return name_hash ^ (value_hash << 1);                   // (3)
     }
 };

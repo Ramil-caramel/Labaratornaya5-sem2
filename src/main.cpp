@@ -1,10 +1,4 @@
-#include <iostream>
 #include "Header.hpp"
-#include <list>
-#include <deque>
-#include <random>
-#include <algorithm>
-#include <set>
 
 int main(){
     //Важное условие, банки так то не хранят все кридиты в одном пуле, 
@@ -48,5 +42,17 @@ int main(){
         std::cout << std::endl;
     }
 
+    std::cout << "unordered_set" << std::endl;
+
+    std::unordered_set<Credit, CreditHash> my_unordered_set;
+    for (int i = 0; i < 10; ++i){
+        Credit a = generate_random_credit(std::to_string(i), "RUB");
+        my_unordered_set.insert(a);
+        my_unordered_set.insert(a);
+    }
+    for (std::unordered_set<Credit,CreditHash>::iterator itr = my_unordered_set.begin(); itr != my_unordered_set.end(); ++itr){
+        std::cout << *itr;
+        std::cout << std::endl;
+    }
 
 }
